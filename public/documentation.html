@@ -7,11 +7,86 @@
     <title>Movie Database API</title>
   </head>
   <body>
+    <h1>Movie Database API</h1>
     <p>
       A server-side component of a 'movies' web application. This web
       application will provide users with access to information about different
       movies, directors, and genres. Users will be able to sign up, update their
       personal information, and create a list of their favorite movies.
     </p>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Logic:</strong></td>
+          <td><strong>URL:</strong></td>
+          <td><strong>Method:</strong></td>
+          <td><strong>Request body data format:</strong></td>
+          <td><strong>Response body data format:</strong></td>
+        </tr>
+        <tr>
+          <td>Return a list of all movies</td>
+          <td>/movies</td>
+          <td><code>GET</code></td>
+          <td>None</td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td>Return data about a movie</td>
+          <td>/movies/:movieTitle</td>
+          <td><code>GET</code></td>
+          <td>None</td>
+          <td>A JSON object holding data about the requested movie.</td>
+        </tr>
+        <tr>
+          <td>Return data about a genre</td>
+          <td>/movies/genre/:genreName</td>
+          <td><code>GET</code></td>
+          <td>None</td>
+          <td>A JSON object holding data about the requested genre.</td>
+        </tr>
+        <tr>
+          <td>Return data about a director</td>
+          <td>/movies/directors/:directorName</td>
+          <td><code>GET</code></td>
+          <td>None</td>
+          <td>A JSON object holding data about the requested director.</td>
+        </tr>
+        <tr>
+          <td>Allow new users to register</td>
+          <td>/users</td>
+          <td><code>POST</code></td>
+          <td>A JSON object holding data about the user to add.</td>
+          <td>A JSON object holding data about the user that was added.</td>
+        </tr>
+        <tr>
+          <td>Allow users to update their user info</td>
+          <td>/users/:id</td>
+          <td><code>PUT</code></td>
+          <td>A JSON object holding new user data.</td>
+          <td>A JSON object holding of the updated user data.</td>
+        </tr>
+        <tr>
+          <td>Allow users to add to their favorite movies</td>
+          <td>/users/:id/:movieTitle</td>
+          <td><code>POST</code></td>
+          <td>None</td>
+          <td>A message indicating the movie was removed.</td>
+        </tr>
+        <tr>
+          <td>Allow users to delete from their favorite movies</td>
+          <td>/users/:id/:movieTitle</td>
+          <td><code>DELETE</code></td>
+          <td>None</td>
+          <td>A message indicating the movie was removed.</td>
+        </tr>
+        <tr>
+          <td>Allow users to deregister</td>
+          <td>/users/:id</td>
+          <td><code>DELETE</code></td>
+          <td>None</td>
+          <td>A message indicating the user was deregistered.</td>
+        </tr>
+      </tbody>
+    </table>
   </body>
 </html>
