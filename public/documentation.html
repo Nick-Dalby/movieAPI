@@ -5,88 +5,113 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movie Database API</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
-    <h1>Movie Database API</h1>
-    <p>
-      A server-side component of a 'movies' web application. This web
-      application will provide users with access to information about different
-      movies, directors, and genres. Users will be able to sign up, update their
-      personal information, and create a list of their favorite movies.
-    </p>
-    <table>
-      <tbody>
-        <tr>
-          <td><strong>Logic:</strong></td>
-          <td><strong>URL:</strong></td>
-          <td><strong>Method:</strong></td>
-          <td><strong>Request body data format:</strong></td>
-          <td><strong>Response body data format:</strong></td>
-        </tr>
-        <tr>
-          <td>Return a list of all movies</td>
-          <td>/movies</td>
-          <td><code>GET</code></td>
-          <td>None</td>
-          <td>None</td>
-        </tr>
-        <tr>
-          <td>Return data about a movie</td>
-          <td>/movies/:movieTitle</td>
-          <td><code>GET</code></td>
-          <td>None</td>
-          <td>A JSON object holding data about the requested movie.</td>
-        </tr>
-        <tr>
-          <td>Return data about a genre</td>
-          <td>/movies/genre/:genreName</td>
-          <td><code>GET</code></td>
-          <td>None</td>
-          <td>A JSON object holding data about the requested genre.</td>
-        </tr>
-        <tr>
-          <td>Return data about a director</td>
-          <td>/movies/directors/:directorName</td>
-          <td><code>GET</code></td>
-          <td>None</td>
-          <td>A JSON object holding data about the requested director.</td>
-        </tr>
-        <tr>
-          <td>Allow new users to register</td>
-          <td>/users</td>
-          <td><code>POST</code></td>
-          <td>A JSON object holding data about the user to add.</td>
-          <td>A JSON object holding data about the user that was added.</td>
-        </tr>
-        <tr>
-          <td>Allow users to update their user info</td>
-          <td>/users/:id</td>
-          <td><code>PUT</code></td>
-          <td>A JSON object holding new user data.</td>
-          <td>A JSON object holding of the updated user data.</td>
-        </tr>
-        <tr>
-          <td>Allow users to add to their favorite movies</td>
-          <td>/users/:id/:movieTitle</td>
-          <td><code>POST</code></td>
-          <td>None</td>
-          <td>A message indicating the movie was removed.</td>
-        </tr>
-        <tr>
-          <td>Allow users to delete from their favorite movies</td>
-          <td>/users/:id/:movieTitle</td>
-          <td><code>DELETE</code></td>
-          <td>None</td>
-          <td>A message indicating the movie was removed.</td>
-        </tr>
-        <tr>
-          <td>Allow users to deregister</td>
-          <td>/users/:id</td>
-          <td><code>DELETE</code></td>
-          <td>None</td>
-          <td>A message indicating the user was deregistered.</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="container mt-5">
+      <h1>Movie Database API</h1>
+      <p>
+        A server-side component of a 'movies' web application. This web
+        application will provide users with access to information about
+        different movies, directors, and genres. Users will be able to sign up,
+        update their personal information, and create a list of their favorite
+        movies.
+      </p>
+      <table class="table table-hover table-responsive">
+        <tbody>
+          <tr>
+            <th scope="col"><strong>Logic:</strong></th>
+            <th scope="col"><strong>URL:</strong></th>
+            <th scope="col"><strong>Method:</strong></th>
+            <th scope="col"><strong>Request body data format:</strong></th>
+            <th scope="col"><strong>Response body data format:</strong></th>
+          </tr>
+          <tr>
+            <td>Return a list of all movies</td>
+            <td>/movies</td>
+            <td><code>GET</code></td>
+            <td>None</td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <td>Return data about a movie</td>
+            <td>/movies/:movieTitle</td>
+            <td><code>GET</code></td>
+            <td>None</td>
+            <td>A JSON object holding data about the requested movie.</td>
+          </tr>
+          <tr>
+            <td>Return data about a genre</td>
+            <td>/movies/genre/:genreName</td>
+            <td><code>GET</code></td>
+            <td>None</td>
+            <td>A JSON object holding data about the requested genre.</td>
+          </tr>
+          <tr>
+            <td>Return data about a director</td>
+            <td>/movies/directors/:directorName</td>
+            <td><code>GET</code></td>
+            <td>None</td>
+            <td>A JSON object holding data about the requested director.</td>
+          </tr>
+          <tr>
+            <td>Allow new users to register</td>
+            <td>/users</td>
+            <td><code>POST</code></td>
+            <td>A JSON object holding data about the user to add.</td>
+            <td>A JSON object holding data about the user that was added.</td>
+          </tr>
+          <tr>
+            <td>Allow users to update their user info</td>
+            <td>/users/:id</td>
+            <td><code>PUT</code></td>
+            <td>A JSON object holding new user data.</td>
+            <td>A JSON object holding of the updated user data.</td>
+          </tr>
+          <tr>
+            <td>Allow users to add to their favorite movies</td>
+            <td>/users/:id/:movieTitle</td>
+            <td><code>POST</code></td>
+            <td>None</td>
+            <td>A message indicating the movie was removed.</td>
+          </tr>
+          <tr>
+            <td>Allow users to delete from their favorite movies</td>
+            <td>/users/:id/:movieTitle</td>
+            <td><code>DELETE</code></td>
+            <td>None</td>
+            <td>A message indicating the movie was removed.</td>
+          </tr>
+          <tr>
+            <td>Allow users to deregister</td>
+            <td>/users/:id</td>
+            <td><code>DELETE</code></td>
+            <td>None</td>
+            <td>A message indicating the user was deregistered.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
