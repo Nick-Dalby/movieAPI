@@ -8,6 +8,8 @@ const express = require('express'),
 const app = express();
 
 //create json object of top 10 movies
+
+// prettier-ignore
 let movies = [
   {
     "title":"Terminator 2: Judgement Day",
@@ -91,7 +93,7 @@ app.get('/movies', (req, res) => {
 //Return data JSON about a movie
 app.get('/movies/:movieTitle', (req, res) => {
   const { movieTitle } = req.params;
-  const movie = movies.find(movie => movie.title === movieTitle);
+  const movie = movies.find((movie) => movie.title === movieTitle);
 
   if (movie) {
     res.status(200).json(movie);
