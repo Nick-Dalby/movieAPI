@@ -47,7 +47,7 @@
           </tr>
           <tr>
             <td>Return data about a genre</td>
-            <td>/movies/genre/:genreName</td>
+            <td>/movies/genres/:genreName</td>
             <td><code>GET</code></td>
             <td>None</td>
             <td>A JSON object holding data about the requested genre.</td>
@@ -63,33 +63,45 @@
             <td>Allow new users to register</td>
             <td>/users</td>
             <td><code>POST</code></td>
-            <td>A JSON object holding data about the user to add.</td>
+            <td>
+              A JSON object holding data about the user. Format:<br />
+              <code
+                >{<br />Username: String,<br />Password: String,<br />Email:
+                String,<br />Birthday: Date<br />}</code
+              >
+            </td>
             <td>A JSON object holding data about the user that was added.</td>
           </tr>
           <tr>
             <td>Allow users to update their user info</td>
-            <td>/users/:id</td>
+            <td>/users/:Username</td>
             <td><code>PUT</code></td>
-            <td>A JSON object holding new user data.</td>
+            <td>
+              A JSON object holding new user data. Required format:
+              <code
+                >{<br />Username: String,<br />Password: String,<br />Email:
+                String,<br />Birthday: Date<br />}</code
+              >
+            </td>
             <td>A JSON object holding of the updated user data.</td>
           </tr>
           <tr>
             <td>Allow users to add to their favorite movies</td>
-            <td>/users/:id/:movieTitle</td>
+            <td>/users/:Username/movies/:MovieID</td>
             <td><code>POST</code></td>
             <td>None</td>
             <td>A message indicating the movie was removed.</td>
           </tr>
           <tr>
             <td>Allow users to delete from their favorite movies</td>
-            <td>/users/:id/:movieTitle</td>
+            <td>/users/:Username/movies/:MovieID</td>
             <td><code>DELETE</code></td>
             <td>None</td>
             <td>A message indicating the movie was removed.</td>
           </tr>
           <tr>
             <td>Allow users to deregister</td>
-            <td>/users/:id</td>
+            <td>/users/:Username</td>
             <td><code>DELETE</code></td>
             <td>None</td>
             <td>A message indicating the user was deregistered.</td>
