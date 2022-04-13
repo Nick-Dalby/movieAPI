@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/Nico-Diablo/movieAPI#readme",
   "dependencies": {
-    "bcr": "^1.0.0",
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
     "express": "^4.17.3",
