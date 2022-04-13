@@ -11,6 +11,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//importing CORS
+const cors = require('cors');
+app.use(cors());
+
 //importing auth file for login endpoint
 let auth = require('./auth')(app);
 
@@ -29,6 +33,9 @@ mongoose.connect('mongodb://localhost:27017/moviesDB', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
+//importing express validator
+const { check, validationResult } = require('express-validator');
 
 //logging all requests
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {
@@ -115,32 +122,51 @@ app.get(
   Email: String,
   Birthday: Date
 }*/
-app.post('/users', (req, res) => {
-  Users.findOne({ Username: req.body.Username })
-    .then((user) => {
-      if (user) {
-        return res.status(400).send(req.body.Username + 'already exists');
-      } else {
-        Users.create({
-          Username: req.body.Username,
-          Password: req.body.Password,
-          Email: req.body.Email,
-          Birthday: req.body.Birthday,
-        })
-          .then((user) => {
-            res.status(201).json(user);
+app.post(
+  '/users',
+  [
+    check('Username', 'Username is required').isLength({ min: 5 }),
+    check(
+      'Username',
+      'Username contains non alphanumeric characters - not allowed'
+    ).isAlphanumeric(),
+    check('Password', 'Password is reuired').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail(),
+  ],
+  (req, res) => {
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
+    let hashedPassword = Users.hashPassword(req.body.Password);
+    Users.findOne({ Username: req.body.Username })
+      .then((user) => {
+        if (user) {
+          return res.status(400).send(req.body.Username + 'already exists');
+        } else {
+          Users.create({
+            Username: req.body.Username,
+            Password: hashedPassword,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday,
           })
-          .catch((error) => {
-            console.log(error);
-            res.status(500).send('Error: ' + error);
-          });
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(500).send('Error: ' + error);
-    });
-});
+            .then((user) => {
+              res.status(201).json(user);
+            })
+            .catch((error) => {
+              console.log(error);
+              res.status(500).send('Error: ' + error);
+            });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send('Error: ' + error);
+      });
+  }
+);
 
 //get all users
 app.get(
@@ -189,7 +215,25 @@ app.get(
 app.put(
   '/users/:Username',
   passport.authenticate('jwt', { session: false }),
+
+  [
+    check('Username', 'Username is required').isLength({ min: 5 }),
+    check(
+      'Username',
+      'Username contains non alphanumeric characters - not allowed'
+    ).isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail(),
+    check('Birthday', 'not a valid date').isDate(),
+  ],
+
   (req, res) => {
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
     Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
@@ -288,6 +332,7 @@ app.use((err, req, res, next) => {
   res.status(500).send('something broke :(');
 });
 
-app.listen(8080, () => {
-  console.log('Your app is listening on port 8080.');
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0', () => {
+  console.log('Listening on Port ' + port);
 });
