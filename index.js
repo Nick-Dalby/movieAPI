@@ -13,7 +13,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //importing CORS
 const cors = require('cors');
-app.use(cors());
+app.use(
+  cors({
+    origin: '*',
+  })
+);
 
 //importing auth file for login endpoint
 let auth = require('./auth')(app);
